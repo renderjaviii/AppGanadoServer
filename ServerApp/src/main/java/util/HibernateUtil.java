@@ -10,15 +10,28 @@ public class HibernateUtil {
 
 	public static SessionFactory getSessionFactory() {
 		if (sessionFactory == null)
-			sessionFactory = new Configuration().configure().buildSessionFactory();
+			try {
+				sessionFactory = new Configuration().configure().buildSessionFactory();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 
 		return sessionFactory;
 	}
 
 	public static Session getSession() {
 		if (session == null)
-			session = getSessionFactory().openSession();
-		
+			try {
+				session = getSessionFactory().openSession();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
 		return session;
+	}
+
+	public static void close() {// Terminate
+		sessionFactory.close();
+		session.close();
 	}
 }

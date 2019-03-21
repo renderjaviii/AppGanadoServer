@@ -1,8 +1,12 @@
 package model.vo;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the backup database table.

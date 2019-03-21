@@ -1,7 +1,11 @@
 package model.vo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the gender database table.
@@ -21,6 +25,12 @@ public class Gender implements Serializable {
 	public Gender() {
 	}
 
+	public Gender(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -37,4 +47,8 @@ public class Gender implements Serializable {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "{Name: " + getName() + ", Id: " + getId() + "}";
+	}
 }

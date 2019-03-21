@@ -1,7 +1,11 @@
 package model.vo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the cattle database table.
@@ -9,12 +13,13 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name = "Cattle.findAll", query = "SELECT c FROM Cattle c")
+@NamedQuery(name = "Cattle.findByUser", query = "SELECT c FROM cattle c INNER JOIN SELECT DISTINCT e.id FROM estate e, user_app u WHERE e.phone_user =: phone t1 ON c.id_estate = t1.id") // Get user's estate
 public class Cattle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	@Column(name = "age")
 	private Integer age;
 	@Column(name = "details")
@@ -27,13 +32,16 @@ public class Cattle implements Serializable {
 	private Integer idLot;
 	@Column(name = "id_purpose")
 	private Integer idPurpose;
+	@Id
+	@Column(name = "id_estate")
+	private Integer idEstate;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "photo")
-	private byte[] photo;
+	private Byte[] photo;
 	@Column(name = "weight")
-	private double weight;
-
+	private Double weight;
+	
 	public Cattle() {
 	}
 
@@ -101,11 +109,11 @@ public class Cattle implements Serializable {
 		this.name = name;
 	}
 
-	public byte[] getPhoto() {
+	public Byte[] getPhoto() {
 		return this.photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(Byte[] photo) {
 		this.photo = photo;
 	}
 
@@ -117,4 +125,16 @@ public class Cattle implements Serializable {
 		this.weight = weight;
 	}
 
+	public Integer getIdEstate() {
+		return idEstate;
+	}
+
+	public void setIdEstate(Integer id_estate) {
+		this.idEstate = id_estate;
+	}
+
+	@Override
+	public String toString() {
+		return "{ id: " + getId() + ", name: " + getName() + ", idFinca: " + getIdEstate() + "}";
+	}
 }

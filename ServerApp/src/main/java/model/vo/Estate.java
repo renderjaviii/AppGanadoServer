@@ -1,7 +1,11 @@
 package model.vo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the estate database table.
@@ -9,6 +13,9 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name = "Estate.findAll", query = "SELECT e FROM Estate e")
+@NamedQuery(name = "Estate.findByUser", query = "SELECT e FROM Estate e WHERE phone_user =: phone") // Get user's
+																									// estates
+
 public class Estate implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -16,13 +23,15 @@ public class Estate implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "area")
-	private double area;
+	private Double area;
 	@Column(name = "location")
 	private String location;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "photo")
-	private byte[] photo;
+	private Byte[] photo;
+	@Column(name = "phone_user")
+	private Long phoneUser;
 
 	public Estate() {
 	}
@@ -59,12 +68,32 @@ public class Estate implements Serializable {
 		this.name = name;
 	}
 
-	public byte[] getPhoto() {
+	public Byte[] getPhoto() {
 		return this.photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(Byte[] photo) {
 		this.photo = photo;
 	}
 
+	public Long getPhoneUser() {
+		return phoneUser;
+	}
+
+	public void setPhoneUser(Long phoneUser) {
+		this.phoneUser = phoneUser;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setArea(Double area) {
+		this.area = area;
+	}
+
+	@Override
+	public String toString() {
+		return "{ id: " + getId() + ", name: " + getName() + ", phoneUser:  " + getPhoneUser() + "}";
+	}
 }

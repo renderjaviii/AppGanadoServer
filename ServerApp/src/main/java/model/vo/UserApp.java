@@ -1,7 +1,12 @@
 package model.vo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the user_app database table.
@@ -10,12 +15,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_app")
 @NamedQuery(name = "UserApp.findAll", query = "SELECT u FROM UserApp u")
+@NamedQuery(name = "UserApp.login", query = "SELECT u FROM UserApp u WHERE phone =: phone AND password =: password")
 public class UserApp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "phone")
 	private Long phone;
+	@Column(name = "password")
+	private String password;
 	@Column(name = "email")
 	private String email;
 	@Column(name = "id_rol")
@@ -34,6 +42,14 @@ public class UserApp implements Serializable {
 
 	public void setPhone(Long phone) {
 		this.phone = phone;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -68,4 +84,8 @@ public class UserApp implements Serializable {
 		this.photo = photo;
 	}
 
+	@Override
+	public String toString() {
+		return "{phone: " + getPhone() + ", password: " + getPassword() + ", idRol: " + getIdRol() + "}";
+	}
 }
