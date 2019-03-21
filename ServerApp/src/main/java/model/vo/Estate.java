@@ -13,8 +13,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQuery(name = "Estate.findAll", query = "SELECT e FROM Estate e")
-@NamedQuery(name = "Estate.findByUser", query = "SELECT e FROM Estate e WHERE phone_user =: phone") // Get user's
-																									// estates
+@NamedQuery(name = "Estate.findByUser", query = "SELECT e FROM Estate e WHERE phoneUser =: phone") // Get user's estates
 
 public class Estate implements Serializable {
 	private static final long serialVersionUID = 1L;

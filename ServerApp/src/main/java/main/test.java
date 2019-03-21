@@ -1,16 +1,14 @@
 package main;
 
 import model.dao.CattleDAO;
-import model.vo.UserApp;
+import model.vo.Estate;
 
 public class test {
 	public static void main(String[] args) {
 
-		UserApp u = new UserApp();
-		u.setPhone(123l);
-
+		Estate e = new Estate();
+		e.setId(3);
 		
-		CattleDAO.getCattlesByUser(u);
-		
+		CattleDAO.getCattlesByEstate(e);
 	}
 }

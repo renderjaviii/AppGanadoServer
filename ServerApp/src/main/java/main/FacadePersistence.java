@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 
-public abstract class FacadePersistence {
+public abstract class FacadePersistence<T> {
 
 	private static Session session;
 

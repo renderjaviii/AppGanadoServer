@@ -1,7 +1,6 @@
 package model.vo;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +12,8 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQuery(name = "Cattle.findAll", query = "SELECT c FROM Cattle c")
-@NamedQuery(name = "Cattle.findByUser", query = "SELECT c FROM cattle c INNER JOIN SELECT DISTINCT e.id FROM estate e, user_app u WHERE e.phone_user =: phone t1 ON c.id_estate = t1.id") // Get user's estate
+@NamedQuery(name = "Cattle.findByUser", query = "SELECT c FROM Cattle c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser =: phone)") // Get user's estate
+@NamedQuery(name = "Cattle.findByEstate", query = "SELECT c FROM Cattle c WHERE c.idEstate =: idEstate")
 public class Cattle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class Cattle implements Serializable {
 	private Byte[] photo;
 	@Column(name = "weight")
 	private Double weight;
-	
+
 	public Cattle() {
 	}
 
@@ -129,8 +129,16 @@ public class Cattle implements Serializable {
 		return idEstate;
 	}
 
-	public void setIdEstate(Integer id_estate) {
-		this.idEstate = id_estate;
+	public void setIdEstate(Integer idEstate) {
+		this.idEstate = idEstate;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
 	}
 
 	@Override
