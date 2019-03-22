@@ -11,19 +11,26 @@ import model.vo.Estate;
 
 @SuppressWarnings("unchecked")
 public class CattleDAO extends FacadePersistence<Cattle> {
+	
+	
+	private FacadePersistence<Cattle> facadePersistence;
 
-	public static List<Cattle> getCattlesByUser(UserApp user) {
+	public CattleDAO(Class entityReference) {
+		super(entityReference);
+		facadePersistence = new FacadePersistence<Cattle>(entityReference);
+	}
+
+	public List<Cattle> getCattlesByUser(UserApp user) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByUser");
 		query.setParameter("phone", user.getPhone());
-		return FacadePersistence.getAll(query);
+		return facadePersistence.getAll(query);
 	}
 	
-	// asas
-	// a
-	public static List<Cattle> getCattlesByEstate(Estate estate) {
+
+	public  List<Cattle> getCattlesByEstate(Estate estate) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByEstate");
 		query.setParameter("idEstate", estate.getId());
-		return FacadePersistence.getAll(query);
+		return facadePersistence.getAll(query);
 	}
 	
 

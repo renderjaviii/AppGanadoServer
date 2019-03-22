@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.query.Query;
 import main.FacadePersistence;
+import model.vo.Cattle;
 import model.vo.Estate;
 import model.vo.UserApp;
 import util.HibernateUtil;
@@ -11,10 +12,18 @@ import util.HibernateUtil;
 @SuppressWarnings("unchecked")
 public class EstateDAO extends FacadePersistence<Estate> {
 
-	public static List<Estate> getEstatesByUser(UserApp user) {
+	private FacadePersistence<Estate> facadePersistence;
+	
+	public EstateDAO(Class<Estate> entityReference) {
+		super(entityReference);
+		facadePersistence=new FacadePersistence<Estate>(entityReference);
+		
+	}
+
+	public  List<Estate> getEstatesByUser(UserApp user) {
 		Query<Estate> query = HibernateUtil.getSession().createNamedQuery("Estate.findByUser");
 		query.setParameter("phone", user.getPhone());
-		return FacadePersistence.getAll(query);
+		return facadePersistence.getAll(query);
 	}
 	
 }

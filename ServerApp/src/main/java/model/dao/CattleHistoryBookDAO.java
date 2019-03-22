@@ -13,10 +13,19 @@ import model.vo.UserApp;
 import util.HibernateUtil;
 
 public class CattleHistoryBookDAO extends FacadePersistence<CattleHistoryBook>{
-	public static List<CattleHistoryBook> getCattleHistoryBookByCattle(Cattle cattle) {
+	
+	
+	private FacadePersistence<CattleHistoryBook> facadePersistence;
+	
+	public CattleHistoryBookDAO(Class<CattleHistoryBook> entityReference) {
+		super(entityReference);
+		facadePersistence=new FacadePersistence<CattleHistoryBook>(entityReference);
+	}
+
+	public  List<CattleHistoryBook> getCattleHistoryBookByCattle(Cattle cattle) {
 		Query<CattleHistoryBook> query = HibernateUtil.getSession().createNamedQuery("CattleHistoryBook.findByEstate");
 		query.setParameter("idCattle", cattle.getId());
-		return FacadePersistence.getAll(query);
+		return facadePersistence.getAll(query);
 	}
 
 }

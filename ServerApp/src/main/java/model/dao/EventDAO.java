@@ -6,22 +6,33 @@ import org.hibernate.query.Query;
 
 import antlr.debug.Event;
 import main.FacadePersistence;
+import model.vo.CattleHistoryBook;
 import model.vo.Estate;
 import model.vo.UserApp;
 import util.HibernateUtil;
 
 public class EventDAO extends FacadePersistence<Event>{
+	
 
-	public static List<Event> getEventByUser(UserApp user){
-		Query<Event> query = HibernateUtil.getSession().createNamedQuery("Event.findByUser");
-		query.setParameter("phone", user.getPhone());
-		return FacadePersistence.getAll(query);
+
+	private FacadePersistence<Event> facadePersistence;	
+	public EventDAO(Class<Event> entityReference) {
+		super(entityReference);
+		facadePersistence=new FacadePersistence<Event>(entityReference);
 	}
 	
-	public static List<Event> getEventByEstate(Estate estate){
+
+
+	public List<Event> getEventByUser(UserApp user){
+		Query<Event> query = HibernateUtil.getSession().createNamedQuery("Event.findByUser");
+		query.setParameter("phone", user.getPhone());
+		return facadePersistence.getAll(query);
+	}
+	
+	public List<Event> getEventByEstate(Estate estate){
 		Query<Event> query = HibernateUtil.getSession().createNamedQuery("Event.findByEstate");
 		query.setParameter("idEstate", estate.getId());
-		return FacadePersistence.getAll(query);
+		return facadePersistence.getAll(query);
 	}
 	
 }

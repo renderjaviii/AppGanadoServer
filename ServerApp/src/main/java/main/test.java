@@ -19,7 +19,7 @@ public class test {
 		
 		UserApp a = new UserApp();
 		a.setPhone(Long.valueOf(123));
-		System.out.println(TankDAO.getTankByEstate(e));
+
 		
 	}
 }
