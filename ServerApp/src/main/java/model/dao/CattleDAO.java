@@ -18,7 +18,7 @@ public class CattleDAO extends FacadePersistence<Cattle> {
 		return FacadePersistence.getAll(query);
 	}
 	
-	
+	// asas
 	public static List<Cattle> getCattlesByEstate(Estate estate) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByEstate");
 		query.setParameter("idEstate", estate.getId());
