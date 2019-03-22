@@ -10,7 +10,7 @@ import model.vo.Estate;
 import model.vo.UserApp;
 import util.HibernateUtil;
 
-public class EventDAO {
+public class EventDAO extends FacadePersistence<Event>{
 
 	public static List<Event> getEventByUser(UserApp user){
 		Query<Event> query = HibernateUtil.getSession().createNamedQuery("Event.findByUser");

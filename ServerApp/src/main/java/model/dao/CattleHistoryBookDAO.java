@@ -8,10 +8,11 @@ import main.FacadePersistence;
 import model.vo.Cattle;
 import model.vo.CattleHistoryBook;
 import model.vo.Estate;
+import model.vo.Tank;
 import model.vo.UserApp;
 import util.HibernateUtil;
 
-public class CattleHistoryBookDAO {
+public class CattleHistoryBookDAO extends FacadePersistence<CattleHistoryBook>{
 	public static List<CattleHistoryBook> getCattleHistoryBookByCattle(Cattle cattle) {
 		Query<CattleHistoryBook> query = HibernateUtil.getSession().createNamedQuery("CattleHistoryBook.findByEstate");
 		query.setParameter("idCattle", cattle.getId());
