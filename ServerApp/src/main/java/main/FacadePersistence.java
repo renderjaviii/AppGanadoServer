@@ -9,7 +9,7 @@ import util.HibernateUtil;
 public abstract class FacadePersistence<T> {
 
 	private static Session session;
-
+//
 	static {// This method initialize the session
 		System.out.println("Starting session");
 		session = HibernateUtil.getSession();
