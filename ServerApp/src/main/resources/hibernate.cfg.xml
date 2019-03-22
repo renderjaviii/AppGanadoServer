@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Connection settings -->
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://ec2-75-101-133-29.compute-1.amazonaws.com:5432/d6c3o03jtp758j?sslmode=require</property>
+		<property name="hibernate.connection.username">xuillykuxqpcax</property>
+		<property name="hibernate.connection.password">a9376c94241bfcd660abf5560765f603440a35582dc6548d6c820bbe47b220d4</property>
+
+		<!-- SQL dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+		<!-- Print executed SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<!-- Validate database on startup -->
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+
+		<!-- Annotated entity classes -->
+		<mapping class="model.vo.Breed" />
+		<mapping class="model.vo.Cattle" />
+		<mapping class="model.vo.CattleHistoryBook" />
+		<mapping class="model.vo.Estate" />
+		<mapping class="model.vo.Event" />
+		<mapping class="model.vo.EventType" />
+		<mapping class="model.vo.Gender" />
+		<mapping class="model.vo.HistoryType" />
+		<mapping class="model.vo.Lot" />
+		<mapping class="model.vo.ProductionBook" />
+		<mapping class="model.vo.Purpose" />
+		<mapping class="model.vo.Rol" />
+		<mapping class="model.vo.Tank" />
+		<mapping class="model.vo.UserApp" />
+
+
+
+	</session-factory>
+</hibernate-configuration>
