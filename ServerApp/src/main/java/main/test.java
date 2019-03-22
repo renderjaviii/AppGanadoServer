@@ -3,9 +3,6 @@ package main;
 import model.dao.FactoryDAO;
 import model.vo.Cattle;
 import model.vo.Estate;
-import model.vo.Gender;
-import util.FacadePersistence;
-import util.HibernateUtil;
 
 public class test {
 	public static void main(String[] args) {
@@ -15,8 +12,12 @@ public class test {
 		e.setName("Chadli");
 
 		FactoryDAO.getEstateDAO().getAll();
-		
-		//FactoryDAO.getCattleDAO().getCattlesByEstate(e);
+
+		// FactoryDAO.getCattleDAO().getCattlesByEstate(e);
 		FactoryDAO.getCattleDAO().getOne(1);
+
+		FactoryDAO factoryDAO = new FactoryDAO(Cattle.class);
+		factoryDAO.delete(e);
+		factoryDAO.getAll();
 	}
 }
