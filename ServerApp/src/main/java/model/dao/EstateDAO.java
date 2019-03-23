@@ -3,32 +3,6 @@ package model.dao;
 import java.util.List;
 
 import org.hibernate.query.Query;
-<<<<<<< HEAD
-import main.FacadePersistence;
-import model.vo.Cattle;
-import model.vo.Estate;
-import model.vo.UserApp;
-import util.HibernateUtil;
-
-@SuppressWarnings("unchecked")
-public class EstateDAO extends FacadePersistence<Estate> {
-
-	private FacadePersistence<Estate> facadePersistence;
-	
-	public EstateDAO(Class<Estate> entityReference) {
-		super(entityReference);
-		facadePersistence=new FacadePersistence<Estate>(entityReference);
-		
-	}
-
-	public  List<Estate> getEstatesByUser(UserApp user) {
-		Query<Estate> query = HibernateUtil.getSession().createNamedQuery("Estate.findByUser");
-		query.setParameter("phone", user.getPhone());
-		return facadePersistence.getAll(query);
-	}
-	
-=======
-
 import model.vo.Cattle;
 import model.vo.Estate;
 import model.vo.UserApp;
@@ -50,6 +24,4 @@ public class EstateDAO extends FacadePersistence<Estate> {
 		query.setParameter("phone", user.getPhone());
 		return facadePersistence.getAll(query);
 	}
-
->>>>>>> refs/remotes/origin/master
 }
