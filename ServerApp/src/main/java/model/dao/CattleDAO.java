@@ -34,7 +34,6 @@ public class CattleDAO extends FacadePersistence<Cattle> {
 		return facadePersistence.getAll(query);
 	}
 	
-=======
 import model.vo.UserApp;
 import util.FacadePersistence;
 import util.HibernateUtil;
