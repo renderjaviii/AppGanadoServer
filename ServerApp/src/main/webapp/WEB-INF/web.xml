@@ -10,9 +10,39 @@
   	<description></description>
   	<servlet-class>servlet.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>EstateServlet</servlet-name>
+  	<display-name>EstateServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.EstateServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CattleServlet</servlet-name>
+  	<display-name>CattleServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.CattleServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EventServlet</servlet-name>
+  	<display-name>EventServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.EventServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EstateServlet</servlet-name>
+  	<url-pattern>/estate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CattleServlet</servlet-name>
+  	<url-pattern>/cattle</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EventServlet</servlet-name>
+  	<url-pattern>/event</url-pattern>
   </servlet-mapping>
   
   
