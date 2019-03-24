@@ -51,20 +51,16 @@ public class FactoryDAO extends FacadePersistence {
 			tankDAO = new TankDAO(Tank.class);
 		return tankDAO;
 	}
-<<<<<<< HEAD
+
 	
-	public static EventDAO getEventDAO(){
-		
-		return eventDAO==null ? new EventDAO(Event.class) null: eventDAO;
-		
-		
-=======
+
+
 
 	public static EventDAO getEventDAO() {
 		if (eventDAO == null)
 			eventDAO = new EventDAO(Event.class);
 		return eventDAO;
->>>>>>> branch 'CarlosCordobaBranch' of https://github.com/renderjaviii/AppGanadoServer
+
 	}
 
 	public FactoryDAO(Class entityReference) {
