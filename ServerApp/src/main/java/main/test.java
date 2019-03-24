@@ -1,6 +1,5 @@
 package main;
 
-
 import model.dao.FactoryDAO;
 import model.vo.Cattle;
 import model.vo.Estate;
@@ -17,8 +16,5 @@ public class test {
 		// FactoryDAO.getCattleDAO().getCattlesByEstate(e);
 		FactoryDAO.getCattleDAO().getOne(1);
 
-		FactoryDAO factoryDAO = new FactoryDAO(Cattle.class);
-		factoryDAO.delete(e);
-		factoryDAO.getAll();
 	}
 }

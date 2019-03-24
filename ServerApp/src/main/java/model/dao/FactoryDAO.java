@@ -3,10 +3,8 @@ package model.dao;
 import model.vo.Cattle;
 import model.vo.Estate;
 import model.vo.UserApp;
-import util.FacadePersistence;
 
-@SuppressWarnings("all")
-public class FactoryDAO extends FacadePersistence {
+public class FactoryDAO {
 
 	private static CattleDAO cattleDAO;
 	private static EstateDAO estateDAO;
@@ -28,10 +26,6 @@ public class FactoryDAO extends FacadePersistence {
 		if (userAppDAO == null)
 			userAppDAO = new UserAppDAO(UserApp.class);
 		return userAppDAO;
-	}
-
-	public FactoryDAO(Class entityReference) {
-		super(entityReference);
 	}
 
 }
