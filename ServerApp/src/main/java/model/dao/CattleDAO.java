@@ -1,11 +1,10 @@
 package model.dao;
 
-import java.util.List;
-
-import org.hibernate.query.Query;
 import model.vo.UserApp;
 import util.FacadePersistence;
 import util.HibernateUtil;
+import java.util.List;
+import org.hibernate.query.Query;
 import model.vo.Cattle;
 import model.vo.Estate;
 
@@ -29,8 +28,6 @@ public class CattleDAO extends FacadePersistence<Cattle> {
 	public List<Cattle> getCattlesByEstate(Estate estate) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByEstate");
 		query.setParameter("idEstate", estate.getId());
-
 		return facadePersistence.getAll(query);
 	}
-
 }

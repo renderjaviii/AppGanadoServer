@@ -1,7 +1,6 @@
 package model.dao;
 
 import org.hibernate.query.Query;
-
 import model.vo.UserApp;
 import util.FacadePersistence;
 import util.HibernateUtil;

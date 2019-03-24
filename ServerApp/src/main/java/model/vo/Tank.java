@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQuery(name = "Tank.findAll", query = "SELECT t FROM Tank t")
+@NamedQuery(name = "Tank.findByEstate", query = "SELECT c FROM Tank c WHERE c.idEstate=:idEstate")
 public class Tank implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +24,16 @@ public class Tank implements Serializable {
 	private double capacity;
 	@Column(name = "name")
 	private String name;
+	@Column(name = "id_estate")
+	private int idEstate;
+
+	public int getIdEstate() {
+		return idEstate;
+	}
+
+	public void setIdEstate(int idEstate) {
+		this.idEstate = idEstate;
+	}
 
 	public Tank() {
 	}
@@ -49,6 +60,11 @@ public class Tank implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Tank [id=" + id + ", capacity=" + capacity + ", name=" + name + ", idEstate=" + idEstate + "]";
 	}
 
 }

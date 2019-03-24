@@ -3,7 +3,6 @@ package model.dao;
 import java.util.List;
 
 import org.hibernate.query.Query;
-
 import model.vo.Cattle;
 import model.vo.Estate;
 import model.vo.UserApp;
@@ -25,5 +24,4 @@ public class EstateDAO extends FacadePersistence<Estate> {
 		query.setParameter("phone", user.getPhone());
 		return facadePersistence.getAll(query);
 	}
-
 }
