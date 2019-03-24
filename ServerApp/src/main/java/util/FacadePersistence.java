@@ -1,11 +1,8 @@
-package main;
-
+package util;
 
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-
-import util.HibernateUtil;
 
 public class FacadePersistence<T> {
 

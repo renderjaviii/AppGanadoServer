@@ -1,19 +1,17 @@
 
 package model.dao;
 
-import java.util.List;
-
-import org.hibernate.query.Query;
-import main.FacadePersistence;
 import model.vo.UserApp;
+import util.FacadePersistence;
 import util.HibernateUtil;
+import java.util.List;
+import org.hibernate.query.Query;
 import model.vo.Cattle;
 import model.vo.Estate;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("all")
 public class CattleDAO extends FacadePersistence<Cattle> {
-	
-	
+
 	private FacadePersistence<Cattle> facadePersistence;
 
 	public CattleDAO(Class entityReference) {
@@ -24,15 +22,13 @@ public class CattleDAO extends FacadePersistence<Cattle> {
 	public List<Cattle> getCattlesByUser(UserApp user) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByUser");
 		query.setParameter("phone", user.getPhone());
+
 		return facadePersistence.getAll(query);
 	}
-	
 
-	public  List<Cattle> getCattlesByEstate(Estate estate) {
+	public List<Cattle> getCattlesByEstate(Estate estate) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByEstate");
 		query.setParameter("idEstate", estate.getId());
 		return facadePersistence.getAll(query);
 	}
-	
-
 }

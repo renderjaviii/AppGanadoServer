@@ -16,8 +16,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e")
-@NamedQuery(name ="Event.findByUser", query= "SELECT c FROM Event c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser =: phone)")
-@NamedQuery(name ="Event.findByEstate", query="SELECT c FROM Event c WHERE c.idEstate =: idEstate")
+@NamedQuery(name = "Event.findByUser", query = "SELECT c FROM Event c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser =: phone)")
+@NamedQuery(name = "Event.findByEstate", query = "SELECT c FROM Event c WHERE c.idEstate =: idEstate")
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,12 +35,6 @@ public class Event implements Serializable {
 	private String details;
 	@Column(name = "manager")
 	private String manager;
-
-	@Override
-	public String toString() {
-		return "Event [idEstate=" + idEstate + ", date=" + date + ", idEventType=" + idEventType + ", name=" + name
-				+ ", details=" + details + ", manager=" + manager + "]";
-	}
 
 	public Event() {
 	}
@@ -97,4 +91,9 @@ public class Event implements Serializable {
 		return serialVersionUID;
 	}
 
+	@Override
+	public String toString() {
+		return "Event [idEstate=" + idEstate + ", date=" + date + ", idEventType=" + idEventType + ", name=" + name
+				+ ", details=" + details + ", manager=" + manager + "]";
+	}
 }
