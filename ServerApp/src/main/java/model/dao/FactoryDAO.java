@@ -47,7 +47,7 @@ public class FactoryDAO extends FacadePersistence {
 	
 	public static EventDAO getEventDAO(){
 		
-		return eventDAO==null ? /*new EventDAO(Event.class)*/ null: eventDAO;
+		return eventDAO==null ? new EventDAO(Event.class) null: eventDAO;
 		
 		
 	}
