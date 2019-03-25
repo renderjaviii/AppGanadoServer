@@ -64,7 +64,6 @@ create table Cattle(
 );
 
 
-
 create table Event_Type(
 	id serial,
 	name varchar(255),
@@ -123,3 +122,6 @@ create table Production_Book(
 	production float,
 	primary key(id)
 );
+
+
+ALTER TABLE cattle ADD CONSTRAINT unique_cattle UNIQUE (code, id_estate);
