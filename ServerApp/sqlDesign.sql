@@ -125,3 +125,4 @@ create table Production_Book(
 
 
 ALTER TABLE cattle ADD CONSTRAINT unique_cattle UNIQUE (code, id_estate);
+ALTER TABLE estate ADD CONSTRAINT unque_estate UNIQUE(phone_user, name)
