@@ -19,9 +19,9 @@ public class EstateDAO extends FacadePersistence<Estate> {
 		facadePersistence = new FacadePersistence<Estate>(entityReference);
 	}
 
-	public List<Estate> getEstatesByUser(UserApp user) {
+	public List<Estate> getEstatesByUser(Long phone) {
 		Query<Estate> query = HibernateUtil.getSession().createNamedQuery("Estate.findByUser");
-		query.setParameter("phone", user.getPhone());
+		query.setParameter("phone", phone);
 		return facadePersistence.getAll(query);
 	}
 

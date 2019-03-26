@@ -11,12 +11,14 @@ import util.HibernateUtil;
 @SuppressWarnings("all")
 public class EventDAO extends FacadePersistence<Event> {
 
+
+	private FacadePersistence<Event> facadePersistence;
+
 	public EventDAO(Class<Event> entityReference) {
 		super(entityReference);
 		facadePersistence = new FacadePersistence<Event>(entityReference);
 	}
 
-	private FacadePersistence<Event> facadePersistence;
 
 	public List<Event> getEventByUser(UserApp user) {
 		Query<Event> query = HibernateUtil.getSession().createNamedQuery("Event.findByUser");

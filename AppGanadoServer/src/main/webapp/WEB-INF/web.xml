@@ -34,6 +34,30 @@
   	<description></description>
   	<servlet-class>servlet.UserAppServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LotGender</servlet-name>
+  	<display-name>LotGender</display-name>
+  	<description></description>
+  	<servlet-class>servlet.LotGender</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LotServlet</servlet-name>
+  	<display-name>LotServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.LotServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PurposeServlet</servlet-name>
+  	<display-name>PurposeServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.PurposeServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>BreedServlet</servlet-name>
+  	<display-name>BreedServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.BreedServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
@@ -53,6 +77,22 @@
   <servlet-mapping>
   	<servlet-name>UserAppServlet</servlet-name>
   	<url-pattern>/userApp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LotGender</servlet-name>
+  	<url-pattern>/LotGender</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LotServlet</servlet-name>
+  	<url-pattern>/lot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PurposeServlet</servlet-name>
+  	<url-pattern>/purpose</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BreedServlet</servlet-name>
+  	<url-pattern>/breed</url-pattern>
   </servlet-mapping>
   
   

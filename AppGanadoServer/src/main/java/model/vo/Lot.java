@@ -3,22 +3,22 @@ package model.vo;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the lot database table.
  * 
  */
 @Entity
-@NamedQuery(name="Lot.findAll", query="SELECT l FROM Lot l")
+@NamedQuery(name = "Lot.findAll", query = "SELECT l FROM Lot l")
 public class Lot implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
 
 	public Lot() {
@@ -40,4 +40,8 @@ public class Lot implements Serializable {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Lot [id=%s, name=%s]", id, name);
+	}
 }

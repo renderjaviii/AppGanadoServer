@@ -39,4 +39,9 @@ public class Purpose implements Serializable {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Purpose [id=%s, name=%s]", id, name);
+	}
+
 }

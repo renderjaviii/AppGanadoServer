@@ -15,7 +15,6 @@ public class GsonPOJOFactory {
 
 	public static <T> T getPOJO(BufferedReader gsonElement, Class<T> entityReference) {// Generating a instance entity  using JSON string
 		T entity = gson.fromJson(gsonElement, entityReference);
-		System.out.println(entity);
 		return entity;
 	}
 

@@ -39,4 +39,11 @@ public class Breed implements Serializable {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Breed [id=%s, name=%s]", id, name);
+	}
+	
+	
+
 }

@@ -32,7 +32,6 @@ public class EstateServlet extends HttpServlet {
 		System.out.println("action: " + action + " / user: " + phoneUser);
 
 		Estate estate = null;
-		UserApp user = null;
 
 		switch (action) {
 		case "insert":
@@ -40,21 +39,42 @@ public class EstateServlet extends HttpServlet {
 			response.getWriter().write(FactoryDAO.getEstateDAO().saveOrUpdate(estate) ? "true" : "false");
 			break;
 
+		default:
+			break;
+		}
+
+		response.getWriter().flush();
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getHeader("action");
+
+		Long phoneUser = null;
+		try {
+			phoneUser = Long.parseLong(request.getHeader("phone"));
+		} catch (NumberFormatException ex) {
+		}
+
+		System.out.println("action: " + action + " / user: " + phoneUser);
+
+		Estate estate = null;
+	
+		switch (action) {
 		case "getAll":// Get All by User
-			user = GsonPOJOFactory.getPOJO(request.getReader(), UserApp.class);
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getEstateDAO().getEstatesByUser(user)));
+			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getEstateDAO().getEstatesByUser(phoneUser)));
 			break;
 
 		case "getOne":// Get One by Estate_Name a Phone_User
 			estate = GsonPOJOFactory.getPOJO(request.getReader(), Estate.class);
 			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getEstateDAO().getEstate(estate)));
 			break;
-			
+
 		default:
 			break;
 		}
-		
+
 		response.getWriter().flush();
 	}
-
 }

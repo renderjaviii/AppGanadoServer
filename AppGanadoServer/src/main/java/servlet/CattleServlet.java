@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.FactoryDAO;
 import model.vo.Cattle;
 import model.vo.Estate;
+import model.vo.UserApp;
 import util.GsonPOJOFactory;
 
 public class CattleServlet extends HttpServlet {
@@ -20,7 +21,34 @@ public class CattleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String action = request.getHeader("action");
+
+		Long phoneUser = null;
+		try {
+			phoneUser = Long.parseLong(request.getHeader("phone"));
+		} catch (NumberFormatException ex) {
+		}
+		
+		System.out.println("action: " + action + " / user: " + phoneUser);
+
+		Cattle cattle = null;
+		Estate estate = null;
+
+		switch (action) {
+		case "getAll":// Get by User
+			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getCattleDAO().getCattlesByUser(phoneUser)));
+			break;
+
+		case "getOne":// Get one
+			cattle = GsonPOJOFactory.getPOJO(request.getReader(), Cattle.class);
+			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getCattleDAO().getCattle(cattle)));
+			break;
+		default:
+			break;
+		}
+
+		response.getWriter().flush();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +65,6 @@ public class CattleServlet extends HttpServlet {
 		System.out.println("action: " + action + " / user: " + phoneUser);
 
 		Cattle cattle = null;
-		Estate estate = null;
 
 		switch (action) {
 		case "insert":
@@ -45,15 +72,6 @@ public class CattleServlet extends HttpServlet {
 			response.getWriter().write(FactoryDAO.getCattleDAO().saveOrUpdate(cattle) ? "true" : "false");
 			break;
 
-		case "getAll":// Get by Estate
-			estate = GsonPOJOFactory.getPOJO(request.getReader(), Estate.class);
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getCattleDAO().getCattlesByEstate(estate)));
-			break;
-
-		case "getOne":// Get one
-			cattle = GsonPOJOFactory.getPOJO(request.getReader(), Cattle.class);
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getCattleDAO().getCattle(cattle)));
-			break;
 		default:
 			break;
 		}

@@ -18,9 +18,9 @@ public class CattleDAO extends FacadePersistence<Cattle> {
 		facadePersistence = new FacadePersistence<Cattle>(entityReference);
 	}
 
-	public List<Cattle> getCattlesByUser(UserApp user) {
+	public List<Cattle> getCattlesByUser(Long phone) {
 		Query<Cattle> query = HibernateUtil.getSession().createNamedQuery("Cattle.findByUser");
-		query.setParameter("phone", user.getPhone());
+		query.setParameter("phone", phone);
 
 		return facadePersistence.getAll(query);
 	}
