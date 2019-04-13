@@ -22,7 +22,7 @@ create table Gender(
 
 create table Rol(
 	id serial,
-	nombre varchar(255),
+	name varchar(255),
 	primary key(id)
 );
 
