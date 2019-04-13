@@ -10,9 +10,9 @@ import java.util.Date;
  * 
  */
 @Entity
-@NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e")
-@NamedQuery(name = "Event.findByUser", query = "SELECT c FROM Event c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser =: phone)")
-@NamedQuery(name = "Event.findByEstate", query = "SELECT c FROM Event c WHERE c.idEstate =: idEstate")
+@NamedQueries({@NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
+@NamedQuery(name = "Event.findByUser", query = "SELECT c FROM Event c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser = ?1)"),
+@NamedQuery(name = "Event.findByEstate", query = "SELECT c FROM Event c WHERE c.idEstate = ?1")})
 public class Event implements Serializable {
 	private static final long serialVersionUID = 1L;
 

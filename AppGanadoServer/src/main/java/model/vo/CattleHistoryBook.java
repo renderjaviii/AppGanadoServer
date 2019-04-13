@@ -11,8 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "cattle_history_book")
-@NamedQuery(name = "CattleHistoryBook.findAll", query = "SELECT c FROM CattleHistoryBook c")
-@NamedQuery(name = "CattleHistoryBook.findByEstate", query = "SELECT c FROM CattleHistoryBook c WHERE c.idCattle=:idCattle")
+@NamedQueries({@NamedQuery(name = "CattleHistoryBook.findAll", query = "SELECT c FROM CattleHistoryBook c"),
+    @NamedQuery(name = "CattleHistoryBook.findByEstate", query = "SELECT c FROM CattleHistoryBook c WHERE c.idCattle = ?1")})
 public class CattleHistoryBook implements Serializable {
 	private static final long serialVersionUID = 1L;
 

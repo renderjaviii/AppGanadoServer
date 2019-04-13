@@ -2,79 +2,97 @@ package servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.FactoryDAO;
+import util.DAOFactory;
 import model.vo.Estate;
-import model.vo.UserApp;
-import util.GsonPOJOFactory;
+import util.FacadePersistence;
+import util.GsonFactory;
 
+@WebServlet("/estate")
 public class EstateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public EstateServlet() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    public EstateServlet() {
+        super();
+    }
 
-		String action = request.getHeader("action");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getHeader("action");
 
-		int phoneUser = 0;
-		try {
-			phoneUser = Integer.parseInt(request.getHeader("phone"));
-		} catch (NumberFormatException ex) {
-		}
+        int phoneUser = 0;
+        try {
+            phoneUser = Integer.parseInt(request.getHeader("phone"));
+        } catch (NumberFormatException ex) {
+        }
 
-		System.out.println("action: " + action + " / user: " + phoneUser);
+        System.out.println("action: " + action + " / user: " + phoneUser);
 
-		Estate estate = null;
+        Estate estate = null;
 
-		switch (action) {
-		case "insert":
-			estate = GsonPOJOFactory.getPOJO(request.getReader(), Estate.class);
-			response.getWriter().write(FactoryDAO.getEstateDAO().saveOrUpdate(estate) ? "true" : "false");
-			break;
+        switch (action) {
+            case "insert":
+                estate = GsonFactory.getPOJO(request.getReader(), Estate.class);
+                response.getWriter().write(DAOFactory.getEstateDAO().save(estate) ? "true" : "false");
+                break;
 
-		default:
-			break;
-		}
+            default:
+                break;
+        }
 
-		response.getWriter().flush();
-	}
+        response.getWriter().flush();
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getHeader("action");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
-		Long phoneUser = null;
-		try {
-			phoneUser = Long.parseLong(request.getHeader("phone"));
-		} catch (NumberFormatException ex) {
-		}
+        String action = request.getHeader("action");
 
-		System.out.println("action: " + action + " / user: " + phoneUser);
+        Long phoneUser = null;
+        Integer idEstate = null;
 
-		Estate estate = null;
-	
-		switch (action) {
-		case "getAll":// Get All by User
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getEstateDAO().getEstatesByUser(phoneUser)));
-			break;
+        try {
+            phoneUser = Long.parseLong(request.getHeader("phone"));
+        } catch (NumberFormatException ex) {
+        }
 
-		case "getOne":// Get One by Estate_Name a Phone_User
-			estate = GsonPOJOFactory.getPOJO(request.getReader(), Estate.class);
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getEstateDAO().getEstate(estate)));
-			break;
+        try {
+            idEstate = Integer.valueOf(request.getHeader("id"));
+        } catch (NumberFormatException ex) {
+        }
 
-		default:
-			break;
-		}
+        System.out.println("action: " + action + " / user: " + phoneUser);
 
-		response.getWriter().flush();
-	}
+        Estate estate = null;
+
+        switch (action) {
+            case "getAll":// Get All by User
+                response.getWriter().write(GsonFactory.getJson(DAOFactory.getEstateDAO().getEstatesByUser(phoneUser)));
+                break;
+
+            case "getOne":// Get One by Estate_Name a Phone_User
+                estate = GsonFactory.getPOJO(request.getReader(), Estate.class);
+                response.getWriter().write(GsonFactory.getJson(DAOFactory.getEstateDAO().getEstateByName(estate)));
+                break;
+            case "delete":
+                System.out.print("idEstate = " + idEstate);
+                Boolean validation = DAOFactory.getEstateDAO().delete(idEstate);
+                response.getWriter().write(validation ? "true" : "false");
+
+                break;
+
+            default:
+                break;
+        }
+
+        response.getWriter().flush();
+    }
 }

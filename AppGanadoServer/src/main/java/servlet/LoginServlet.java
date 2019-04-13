@@ -2,39 +2,41 @@ package servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.FactoryDAO;
+import util.DAOFactory;
 import model.vo.UserApp;
-import util.GsonPOJOFactory;
+import util.GsonFactory;
 
+@WebServlet("/loginUser")
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public LoginServlet() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    public LoginServlet() {
+        super();
+    }
 
-		UserApp user = GsonPOJOFactory.getPOJO(request.getReader(), UserApp.class);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		System.out.println("login request: " + user);
+        System.out.println("Starting LoginServlet... ");
+        
+        UserApp user = GsonFactory.getPOJO(request.getReader(), UserApp.class);
+        user = DAOFactory.getUserAppDAO().login(user);
 
-		user = FactoryDAO.getUserAppDAO().login(user);
+        response.getWriter().write(GsonFactory.getJson(user));
+        response.getWriter().flush();
+        System.out.println(user == null ? "user not found" : user);
 
-		response.getWriter().write(GsonPOJOFactory.getJson(user));
-		response.getWriter().flush();
-		System.out.println("logeado: " + user == null ? "user no found" : user);
+    }
 
-	}
-	
-	
-	// GET = obtener
-	// POST = crear / login
-	// PUT = actualizar o reemplazar
-	// DELETE = eliminar / logout
+    // GET = obtener
+    // POST = crear / login
+    // PUT = actualizar o reemplazar
+    // DELETE = eliminar / logout
 }

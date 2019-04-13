@@ -9,8 +9,8 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name = "Tank.findAll", query = "SELECT t FROM Tank t")
-@NamedQuery(name = "Tank.findByEstate", query = "SELECT c FROM Tank c WHERE c.idEstate=:idEstate")
+@NamedQueries({@NamedQuery(name = "Tank.findAll", query = "SELECT t FROM Tank t"),
+@NamedQuery(name = "Tank.findByUser", query = "SELECT t FROM Tank t WHERE t.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser = ?1)")})
 public class Tank implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -59,5 +59,10 @@ public class Tank implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+    @Override
+    public String toString() {
+        return "Tank{" + "id=" + id + ", capacity=" + capacity + ", idEstate=" + idEstate + ", name=" + name + '}';
+    }
 
 }

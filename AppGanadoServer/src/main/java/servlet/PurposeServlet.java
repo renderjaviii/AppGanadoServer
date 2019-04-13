@@ -2,27 +2,30 @@ package servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.FactoryDAO;
-import util.GsonPOJOFactory;
+import util.DAOFactory;
+import util.GsonFactory;
 
+@WebServlet("/purpose")
 public class PurposeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public PurposeServlet() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("PurposeServlet....");
+    public PurposeServlet() {
+        super();
+    }
 
-		response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getPurposeDAO().getAll()));
-		response.getWriter().flush();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("PurposeServlet....");
 
-	}
+        response.getWriter().write(GsonFactory.getJson(DAOFactory.getPurposeDAO().getAll()));
+        response.getWriter().flush();
+
+    }
 
 }

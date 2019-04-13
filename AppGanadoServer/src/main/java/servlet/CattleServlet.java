@@ -1,82 +1,95 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Map;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.FactoryDAO;
+import util.DAOFactory;
 import model.vo.Cattle;
 import model.vo.Estate;
-import model.vo.UserApp;
-import util.GsonPOJOFactory;
+import org.springframework.web.servlet.HandlerMapping;
+import util.GsonFactory;
 
+@WebServlet("/cattle")
 public class CattleServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	public CattleServlet() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    public CattleServlet() {
+        super();
+    }
 
-		String action = request.getHeader("action");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getHeader("action");
 
-		Long phoneUser = null;
-		try {
-			phoneUser = Long.parseLong(request.getHeader("phone"));
-		} catch (NumberFormatException ex) {
-		}
-		
-		System.out.println("action: " + action + " / user: " + phoneUser);
+        Long phoneUser = null;
+        Integer idCattle = null;
+        
+        try {
+            phoneUser = Long.parseLong(request.getHeader("phone"));
+        } catch (NumberFormatException ex) {
+        }
+        
+        try {
+            idCattle = Integer.valueOf(request.getHeader("id"));
+        } catch (NumberFormatException ex) {
+        }
 
-		Cattle cattle = null;
-		Estate estate = null;
+        System.out.println("action: " + action + " / phone_user: " + phoneUser);
 
-		switch (action) {
-		case "getAll":// Get by User
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getCattleDAO().getCattlesByUser(phoneUser)));
-			break;
+        switch (action) {
+            case "getAll":// GetAll by user_phone
+                response.getWriter().write(GsonFactory.getJson(DAOFactory.getCattleDAO().getCattlesByUser(phoneUser)));
+                break;
 
-		case "getOne":// Get one
-			cattle = GsonPOJOFactory.getPOJO(request.getReader(), Cattle.class);
-			response.getWriter().write(GsonPOJOFactory.getJson(FactoryDAO.getCattleDAO().getCattle(cattle)));
-			break;
-		default:
-			break;
-		}
+            case "getOne":// Get one
+                Cattle cattle = GsonFactory.getPOJO(request.getReader(), Cattle.class);
+                response.getWriter().write(GsonFactory.getJson(DAOFactory.getCattleDAO().getCattle(cattle)));
+                break;
 
-		response.getWriter().flush();
-	}
+            case "delete":
+                System.out.print("idCattle = " + idCattle);
+                Boolean validation = DAOFactory.getCattleDAO().delete(idCattle);
+                response.getWriter().write(validation ? "true" : "false");
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+                break;
+            default:
+                break;
+        }
 
-		String action = request.getHeader("action");
+        response.getWriter().flush();
+    }
 
-		int phoneUser = 0;
-		try {
-			phoneUser = Integer.parseInt(request.getHeader("phone"));
-		} catch (NumberFormatException ex) {
-		}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getHeader("action");
 
-		System.out.println("action: " + action + " / user: " + phoneUser);
+        System.out.println("action: " + action);
 
-		Cattle cattle = null;
+        switch (action) {
+            case "insert":
+                Cattle cattle = GsonFactory.getPOJO(request.getReader(), Cattle.class);
+                response.getWriter().write(DAOFactory.getCattleDAO().save(cattle) ? "true" : "false");
+                break;
 
-		switch (action) {
-		case "insert":
-			cattle = GsonPOJOFactory.getPOJO(request.getReader(), Cattle.class);
-			response.getWriter().write(FactoryDAO.getCattleDAO().saveOrUpdate(cattle) ? "true" : "false");
-			break;
+            default:
+                break;
+        }
 
-		default:
-			break;
-		}
+        response.getWriter().flush();
+    }
 
-		response.getWriter().flush();
-	}
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
 
 }

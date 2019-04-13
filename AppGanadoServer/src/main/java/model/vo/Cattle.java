@@ -1,19 +1,15 @@
 package model.vo;
 
 import java.io.Serializable;
-import java.util.Arrays;
-
 import javax.persistence.*;
 
-/**
- * The persistent class for the cattle database table.
- * 
- */
+
 @Entity
-@NamedQuery(name = "Cattle.findAll", query = "SELECT c FROM Cattle c")
-@NamedQuery(name = "Cattle.findByUser", query = "SELECT c FROM Cattle c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser =: phone)") // Get user's  estate
-@NamedQuery(name = "Cattle.findByEstate", query = "SELECT c FROM Cattle c WHERE c.idEstate =: idEstate")
-@NamedQuery(name = "Cattle.findOne", query = "SELECT c FROM Cattle c WHERE c.code =: code AND c.idEstate =: idEstate")
+@NamedQueries({
+@NamedQuery(name = "Cattle.findAll", query = "SELECT c FROM Cattle c"),
+@NamedQuery(name = "Cattle.findByUser", query = "SELECT c FROM Cattle c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser = ?1)"),
+@NamedQuery(name = "Cattle.findByEstate", query = "SELECT c FROM Cattle c WHERE c.idEstate = ?1"),
+@NamedQuery(name = "Cattle.findOne", query = "SELECT c FROM Cattle c WHERE c.code = ?1 AND c.idEstate = ?2")})
 public class Cattle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -157,9 +153,9 @@ public class Cattle implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-				"Cattle [id=%s, age=%s, code=%s, details=%s, idBreed=%s, idEstate=%s, idGender=%s, idLot=%s, idPurpose=%s, name=%s, photo=%s, weight=%s]",
-				id, age, code, details, idBreed, idEstate, idGender, idLot, idPurpose, name, Arrays.toString(photo),
-				weight);
+				"Cattle [id=%s, age=%s, code=%s, details=%s, idBreed=%s, idEstate=%s, idGender=%s, idLot=%s, idPurpose=%s, name=%s, weight=%s]",
+				id, age, code, details, idBreed, idEstate, idGender, idLot, idPurpose, name, weight);
 	}
 
+	
 }

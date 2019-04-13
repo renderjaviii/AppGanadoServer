@@ -6,14 +6,10 @@ import java.util.Arrays;
 import javax.persistence.*;
 
 
-/**
- * The persistent class for the user_app database table.
- * 
- */
 @Entity
 @Table(name = "user_app")
-@NamedQuery(name = "UserApp.findAll", query = "SELECT u FROM UserApp u")
-@NamedQuery(name = "UserApp.login", query = "SELECT u FROM UserApp u WHERE phone =: phone AND password =: password")
+@NamedQueries({@NamedQuery(name = "UserApp.findAll", query = "SELECT u FROM UserApp u"), 
+@NamedQuery(name = "UserApp.login", query = "SELECT u FROM UserApp u WHERE u.phone = ?1 AND u.password = ?2")})
 public class UserApp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -84,8 +80,8 @@ public class UserApp implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("UserApp [phone=%s, email=%s, idRol=%s, name=%s, password=%s, photo=%s]", phone, email,
-				idRol, name, password, Arrays.toString(photo));
+		return String.format("UserApp [phone=%s, email=%s, idRol=%s, name=%s, password=%s", phone, email,
+				idRol, name, password);
 	}
 
 	

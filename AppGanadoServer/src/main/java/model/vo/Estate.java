@@ -10,9 +10,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name = "Estate.findAll", query = "SELECT e FROM Estate e")
-@NamedQuery(name = "Estate.findByUser", query = "SELECT e FROM Estate e WHERE phoneUser =: phone") // Get user's estates
-@NamedQuery(name = "Estate.findOne", query = "SELECT e FROM Estate e WHERE e.name =: name AND e.phoneUser =: phone")
+@NamedQueries({@NamedQuery(name = "Estate.findAll", query = "SELECT e FROM Estate e"),
+@NamedQuery(name = "Estate.findByUser", query = "SELECT e FROM Estate e WHERE e.phoneUser = ?1"),
+@NamedQuery(name = "Estate.findOne", query = "SELECT e FROM Estate e WHERE e.name = ?1 AND e.phoneUser = ?2")})
 public class Estate implements Serializable {
 	private static final long serialVersionUID = 1L;
 
