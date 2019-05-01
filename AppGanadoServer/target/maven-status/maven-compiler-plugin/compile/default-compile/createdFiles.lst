@@ -10,11 +10,14 @@ servlet\LotServlet.class
 servlet\LoginServlet.class
 servlet\BreedServlet.class
 model\dao\EventDAO.class
+util\EstateSize.class
 model\vo\Rol.class
+servlet\IndicatorsServlet.class
 model\vo\CattleHistoryBook.class
 model\vo\Gender.class
 model\vo\Tank.class
 servlet\PurposeServlet.class
+util\EstateBreedSize.class
 model\vo\Cattle.class
 servlet\EventServlet.class
 util\EntityManagerUtil.class

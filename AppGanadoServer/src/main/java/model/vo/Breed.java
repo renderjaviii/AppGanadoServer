@@ -9,7 +9,8 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Breed.findAll", query="SELECT b FROM Breed b")
+@NamedQueries({
+@NamedQuery(name="Breed.findAll", query="SELECT b FROM Breed b")})
 public class Breed implements Serializable {
 	private static final long serialVersionUID = 1L;
 

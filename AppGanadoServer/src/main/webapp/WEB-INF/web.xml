@@ -58,6 +58,12 @@
   	<description></description>
   	<servlet-class>servlet.TankServlet</servlet-class>
   </servlet>
+   <servlet>
+  	<servlet-name>IndicatorsServlet</servlet-name>
+  	<display-name>IndicatorsServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.IndicatorsServlet</servlet-class>
+  </servlet>
     <servlet>
   	<servlet-name>Test</servlet-name>
   	<display-name>Test</display-name>
@@ -99,6 +105,10 @@
    <servlet-mapping>
   	<servlet-name>TankServlet</servlet-name>
   	<url-pattern>/tank</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  	<servlet-name>IndicatorsServlet</servlet-name>
+  	<url-pattern>/indicators</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>Test</servlet-name>

@@ -117,7 +117,7 @@ public class FacadePersistence<T> {
         List<T> entityList = null;
         try {
             entityList = query.getResultList();
-
+            
         } catch (Exception e) {
             System.out.println("GET ALL ERROR " + e.getMessage());
         }

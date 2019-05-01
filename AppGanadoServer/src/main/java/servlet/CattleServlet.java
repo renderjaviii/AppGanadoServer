@@ -28,18 +28,25 @@ public class CattleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("CattleServlet");
         String action = request.getHeader("action");
 
         Long phoneUser = null;
         Integer idCattle = null;
-        
+        Integer idEstate = null;
+
         try {
             phoneUser = Long.parseLong(request.getHeader("phone"));
         } catch (NumberFormatException ex) {
         }
-        
+
         try {
             idCattle = Integer.valueOf(request.getHeader("id"));
+        } catch (NumberFormatException ex) {
+        }
+
+        try {
+            idEstate = Integer.valueOf(request.getHeader("id_estate"));
         } catch (NumberFormatException ex) {
         }
 
@@ -55,8 +62,11 @@ public class CattleServlet extends HttpServlet {
                 response.getWriter().write(GsonFactory.getJson(DAOFactory.getCattleDAO().getCattle(cattle)));
                 break;
 
+            case "getAllByEstate":
+                response.getWriter().write(GsonFactory.getJson(DAOFactory.getCattleDAO().getCattlesByEstate(idEstate)));
+                break;
+
             case "delete":
-                System.out.print("idCattle = " + idCattle);
                 Boolean validation = DAOFactory.getCattleDAO().delete(idCattle);
                 response.getWriter().write(validation ? "true" : "false");
 
@@ -91,5 +101,4 @@ public class CattleServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
 }

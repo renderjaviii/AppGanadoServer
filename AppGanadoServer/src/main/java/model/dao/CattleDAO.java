@@ -5,7 +5,6 @@ import util.EntityManagerUtil;
 import java.util.List;
 import javax.persistence.Query;
 import model.vo.Cattle;
-import model.vo.Estate;
 
 @SuppressWarnings("all")
 public class CattleDAO extends FacadePersistence<Cattle> {
@@ -23,9 +22,9 @@ public class CattleDAO extends FacadePersistence<Cattle> {
         return facadePersistence.getAll(query);
     }
 
-    public List<Cattle> getCattlesByEstate(Estate estate) {
+    public List<Cattle> getCattlesByEstate(Integer idEstate) {
         Query query = EntityManagerUtil.getEntityManager().createNamedQuery("Cattle.findByEstate");
-        query.setParameter(1, estate.getId());
+        query.setParameter(1, idEstate);
         return facadePersistence.getAll(query);
     }
 
