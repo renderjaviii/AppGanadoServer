@@ -36,6 +36,7 @@ model\vo\ProductionBook.class
 servlet\CattleServlet.class
 util\GsonFactory.class
 model\dao\TankDAO.class
+servlet\HistoryBookServlet.class
 servlet\Test.class
 util\DAOFactory.class
 model\vo\Purpose.class

@@ -17,9 +17,9 @@ public class CattleHistoryBookDAO extends FacadePersistence<CattleHistoryBook> {
         facadePersistence = new FacadePersistence<CattleHistoryBook>(entityReference);
     }
 
-    public List<CattleHistoryBook> getCattleHistoryBookByCattle(Cattle cattle) {
-        Query query = EntityManagerUtil.getEntityManager().createNamedQuery("CattleHistoryBook.findByEstate");
-        query.setParameter(1, cattle.getId());
+    public List<CattleHistoryBook> getCattleHistoryBookByCattle(Long phoneUser) {
+        Query query = EntityManagerUtil.getEntityManager().createNamedQuery("CattleHistoryBook.findByUser");
+        query.setParameter(1, phoneUser);
         return facadePersistence.getAll(query);
     }
 

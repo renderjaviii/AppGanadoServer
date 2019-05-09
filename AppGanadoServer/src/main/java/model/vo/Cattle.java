@@ -9,7 +9,8 @@ import javax.persistence.*;
 @NamedQuery(name = "Cattle.findAll", query = "SELECT c FROM Cattle c"),
 @NamedQuery(name = "Cattle.findByUser", query = "SELECT c FROM Cattle c WHERE c.idEstate IN (SELECT DISTINCT e.id FROM Estate e, UserApp u WHERE e.phoneUser = ?1)"),
 @NamedQuery(name = "Cattle.findByEstate", query = "SELECT c FROM Cattle c WHERE c.idEstate = ?1"),
-@NamedQuery(name = "Cattle.findOne", query = "SELECT c FROM Cattle c WHERE c.code = ?1 AND c.idEstate = ?2")})
+@NamedQuery(name = "Cattle.findOne", query = "SELECT c FROM Cattle c WHERE c.code = ?1 AND c.idEstate = ?2")
+})
 public class Cattle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
