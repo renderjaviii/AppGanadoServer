@@ -23,7 +23,7 @@ public class HistoryType implements Serializable {
 	private String name;
 
 	@Column(name="phone_user")
-	private Integer phoneUser;
+	private Long phoneUser;
 
 	public HistoryType() {
 	}
@@ -44,11 +44,11 @@ public class HistoryType implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getPhoneUser() {
+	public Long getPhoneUser() {
 		return this.phoneUser;
 	}
 
-	public void setPhoneUser(Integer phoneUser) {
+	public void setPhoneUser(Long phoneUser) {
 		this.phoneUser = phoneUser;
 	}
 

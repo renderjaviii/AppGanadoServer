@@ -34,8 +34,7 @@ public class CattleHistoryBook implements Serializable {
 	@Column(name="id_history_type")
 	private Integer idHistoryType;
 
-	@Column(name="namehistory")
-	private String namehistory;
+	
 
 	public CattleHistoryBook() {
 	}
@@ -79,13 +78,4 @@ public class CattleHistoryBook implements Serializable {
 	public void setIdHistoryType(Integer idHistoryType) {
 		this.idHistoryType = idHistoryType;
 	}
-
-	public String getNamehistory() {
-		return this.namehistory;
-	}
-
-	public void setNamehistory(String namehistory) {
-		this.namehistory = namehistory;
-	}
-
 }
